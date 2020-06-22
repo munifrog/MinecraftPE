@@ -11,6 +11,8 @@ if [ -a ".gitmodules" ]; then
     pushd "${DIR_MAIN_SUBMODULE}" > /dev/null
       echo -e "Retrieving the latest Nukkit language files (${DIR_MAIN_SUBMODULE}/${DIR_SUB_SUBMODULE})"
       git submodule update --init
+      echo -e "Make \"mvnw\" executable"
+      chmod u+x ./mvnw
       echo -e "Compiling Nukkit code into JAR"
       ./mvnw clean package
     popd > /dev/null
