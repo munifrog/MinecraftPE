@@ -1,0 +1,14 @@
+[Unit]
+Description=Minecraft Pocket Edition Server
+After=network.target
+
+[Service]
+Type=simple
+User=REPLACE_USER
+Group=REPLACE_USER
+Restart=on-abort
+WorkingDirectory=REPLACE_DIR_MINECRAFT
+ExecStart=/usr/bin/java -jar REPLACE_DIR_MINECRAFT/nukkit.jar
+
+[Install]
+WantedBy=multi-user.target

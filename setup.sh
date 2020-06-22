@@ -42,3 +42,24 @@ fi
 
 # Update the Nukkit JAR
 ${0%/*}/update.sh
+
+if [ ! -e "${DIR_SERVICES}/${NAME_SERVICE}" ]; then
+  # Copy the sample service and modify it according to user settings
+  echo -e "Creating service unit file \"${NAME_SERVICE}\""
+  cp ./sample_service "${NAME_SERVICE}"
+  sed -i "s|REPLACE_USER|${USER}|g" "${NAME_SERVICE}"
+  sed -i "s|REPLACE_DIR_MINECRAFT|${DIR_MINECRAFT}|g" "${NAME_SERVICE}"
+  echo -e "Placing \"${NAME_SERVICE}\" within systemd's \"${DIR_SERVICES}\" directory"
+  sudo mv "${NAME_SERVICE}" "${DIR_SERVICES}/${NAME_SERVICE}"
+  sudo chown root.root "${DIR_SERVICES}/${NAME_SERVICE}"
+  sudo chmod 0644 "${DIR_SERVICES}/${NAME_SERVICE}"
+  sudo systemctl daemon-reload
+  echo "Enabling \"${NAME_SERVICE}\""
+  sudo systemctl enable ${NAME_SERVICE}
+  echo "Starting \"${NAME_SERVICE}\""
+  sudo systemctl start ${NAME_SERVICE}
+  sudo systemctl status ${NAME_SERVICE}
+else
+  echo -e "Restarting the service \"${NAME_SERVICE}\"!\n  Unnecessary to set up service again."
+  sudo systemctl restart ${NAME_SERVICE}
+fi
