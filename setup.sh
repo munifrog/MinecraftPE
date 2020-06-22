@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load the defined variables
-. vars.sh
+. ${0%/*}/vars.sh
 
 # Don't allow non-root user
 if [ "${USER}" == "root" ]; then
@@ -40,24 +40,5 @@ else
   fi
 fi
 
-# Retrieve GitHub submodules
-if [ -a ".gitmodules" ]; then
-  DIR_MAIN_SUBMODULE="$( cat .gitmodules | grep "^\s\+path\s=" | sed "s|\\s\+path\\s=\\s||g" )"
-  if [ ! -f "${DIR_MAIN_SUBMODULE}/README.md" ]; then
-    echo -e "Initializing the main GitHub submodule (${DIR_MAIN_SUBMODULE})"
-    git submodule update --init
-  else
-    echo -e "Unnecessary to initialize main GitHub submodule (${DIR_MAIN_SUBMODULE}) again!"
-  fi
-  if [ -a "${DIR_MAIN_SUBMODULE}/.gitmodules" ]; then
-    DIR_SUB_SUBMODULE="$( cat ${DIR_MAIN_SUBMODULE}/.gitmodules | grep "^\s\+path\s=" | sed "s|\\s\+path\\s=\\s||g" )"
-    if [ ! -d "${DIR_MAIN_SUBMODULE}/${DIR_SUB_SUBMODULE}/eng" ]; then
-      echo -e "Initializing the GitHub sub-sub-module (${DIR_MAIN_SUBMODULE}/${DIR_SUB_SUBMODULE})"
-      pushd nukkit > /dev/null
-      git submodule update --init
-      popd > /dev/null
-    else
-      echo -e "Unnecessary to re-initialize sub-sub-module (${DIR_MAIN_SUBMODULE}/${DIR_SUB_SUBMODULE}) again!"
-    fi
-  fi
-fi
+# Update the Nukkit JAR
+${0%/*}/update.sh

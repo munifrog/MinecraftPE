@@ -1,5 +1,17 @@
 # Minecraft Pocket Edition (PE) Raspberry Pi Server
 
+I originally assembled these scripts while setting up a Minecraft Raspberry Pi as a gift for one of my children.
+It took a bit of effort to figure out all the parts, so I thought I would save you (and my future self) the effort.
+
+## Quick Start
+
+On a Raspberry Pi, using Ubuntu OS, execute the following:
+  ```
+  git clone https://github.com/munifrog/minecraftpe.git
+  ./setup.sh
+  (optional) ./update.sh
+  ```
+
 ## Description
 This project is for setting up a Minecraft Pocket Edition (PE) Server on a Raspberry Pi.
 This Minecraft PE server allows for users of iOS and Android mobile devices, connected on the same sub-network, to play together.
@@ -140,3 +152,20 @@ If `git` is not already installed, then you can install it after an operating sy
   ```
 
 At this point you can now clone this repository according to earlier instructions.
+
+### Setting up the Minecraft PE code
+
+Once this repository is cloned, run the `setup.sh` script.
+
+It will download, install, and configure Java;
+retrieve and compile the `nukkit` code;
+link the `nukkit` JAR within the `minecraft` folder (where your world data resides);
+and set up a service so that Minecraft PE will start with the Raspberry Pi.
+
+### Updating your Minecraft PE version
+
+When the time comes to update your code, simply run the `update.sh` script.
+It will update the `nukkit` code
+and restart the Minecraft service.
+Note that this script is called by `setup.sh`
+so you will not need to run it initially, but it does not hurt if you do anyway.
