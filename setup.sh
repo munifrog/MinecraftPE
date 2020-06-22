@@ -11,7 +11,7 @@ fi
 
 # Set up Java
 if [ -d "${DIR_JAVA}/bin" ]; then
-  echo -e "\"${DIR_JAVA}\" already exists!\nUnnecessary to set up Java again!"
+  echo -e "\"${DIR_JAVA}\" already exists!\n  Unnecessary to set up Java again!"
 else
   echo -e "Installing Java at \"${DIR_JAVA}\""
   # If not present then download java.tar.gz

@@ -8,6 +8,7 @@ It took a bit of effort to figure out all the parts, so I thought I would save y
 On a Raspberry Pi, using Ubuntu OS, execute the following:
   ```
   git clone https://github.com/munifrog/minecraftpe.git
+  cd minecraftpe
   ./setup.sh
   (optional) ./update.sh
   ```
@@ -169,3 +170,19 @@ It will update the `nukkit` code
 and restart the Minecraft service.
 Note that this script is called by `setup.sh`
 so you will not need to run it initially, but it does not hurt if you do anyway.
+
+## Connecting to your Raspberry Pi
+
+With the Minecraft PE server and your mobile device(s) connected to the same sub-network,
+the Minecraft server appears on the `Friends` tab as `Raspberry Pi` under `LAN Games`
+
+## Gracefully Shutting Down Your Raspberry Pi
+
+Note that Minecraft server is started when the Raspberry Pi boots up.
+
+There is nothing in this project to trigger a graceful shutdown,
+as unplugging the power will not provide sufficient time.
+It may help to have a way to connect to the Raspberry Pi and issue a proper shutdown:
+  ```
+  shutdown -h now
+  ```
