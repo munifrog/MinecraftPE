@@ -7,8 +7,8 @@ It took a bit of effort to figure out all the parts, so I thought I would save y
 
 On a Raspberry Pi, using Ubuntu OS, execute the following:
   ```
-  git clone https://github.com/munifrog/minecraftpe.git
-  cd minecraftpe
+  git clone https://github.com/munifrog/MinecraftPE.git
+  cd MinecraftPE
   ./setup.sh
   (optional) ./update.sh
   ```
@@ -130,7 +130,7 @@ If `git` is installed, this command will tell you its executable file location.
 
 Clone this repository using the following command:
   ```
-  git clone https://github.com/munifrog/minecraftpe.git
+  git clone https://github.com/munifrog/MinecraftPE.git
   ```
 
 ### Updating the Operating System
