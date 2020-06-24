@@ -53,9 +53,6 @@ if [ ! -e "${DIR_SERVICES}/${NAME_SERVICE}" ]; then
   sudo systemctl daemon-reload
   echo "Enabling \"${NAME_SERVICE}\""
   sudo systemctl enable ${NAME_SERVICE}
-  echo "Starting \"${NAME_SERVICE}\""
-  sudo systemctl start ${NAME_SERVICE}
-  sudo systemctl status ${NAME_SERVICE}
 else
   echo -e "The service \"${NAME_SERVICE}\" already exists!\n  Unnecessary to set up service again."
 fi
