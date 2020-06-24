@@ -70,35 +70,39 @@ This may be preferred while you are figuring out how to communicate connection d
 But ultimately, the Raspberry Pi and mobile devices should connect to the same sub-network, in the same manner (usually _wi-fi_).
 If you have access to the wi-fi router administration, then you can look at the connected devices to determine the IP address assigned to the Raspberry Pi.
 
-An easy way to establish a _wi-fi_ connection is by placing a `wpa_supplicant.conf` file within the `/boot` folder:
+An easy way to establish a _wi-fi_ connection is by modifying the `network-config` file within the `/system-boot` folder:
   ```
-  country=us
-  update_config=1
-  ctrl_interface=/var/run/wpa_supplicant
-
-  network={
-    scan_ssid=1
-    ssid="My Home Network"
-    psk="Passw0rd"
-  }
-
-  network={
-    scan_ssid=1
-    ssid="Work Employee Network"
-    psk="Pa55word"
-  }
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: true
+      optional: true
+  wifis:
+    wlan0:
+      dhcp4: true
+      optional: true
+      access-points:
+        "myhomewifi":
+          password: "S3kr1t"
+        "myworkwifi":
+          password: "correct battery horse staple"
   ```
-Copy the `sample_wpa_supplicant.conf` as `wpa_supplicant.conf`, modify it according to your credentials, and place a copy in the `/boot` folder.
-When you power on the Raspberry Pi this file will be placed into `/boot/firmware/wpa_supplicant.conf`.
+Either copy the `sample_network-config` as `network-config`, or retrieve the OS-provided `/system-boot/network-config`, backing it up if desired.
+Then modify it according to your (various) _wi-fi_ credentials, and replace the copy in the `/system-boot` folder.
+When you power on the Raspberry Pi, it will be processed (at least during first startup) and this file can be found at `/boot/firmware/network-config`.
+I have found that I need to reboot the Raspberry Pi before the _wi-fi_ will actually connect.
 
-An alternative file that you could modify is `network-config`, that comes with the Ubuntu image in the `/boot` folder.
-Copy it from the `/boot` folder, back it up if desired, modify it, and replace the original.
+The Raspbian OS works well with the `wpa_supplicant.conf` file rather than `network-config`.
+It similarly gets placed within the `/boot` folder and is processed at startup.
+There is a `sample_wpa_supplicant.conf` file provided, if desired.
 
 When you are done providing the network details:
  1. Eject the microSD card
  1. Insert the microSD card into the Raspberry Pi
  1. Power on the router (if not already done)
  1. Power on the Raspberry Pi
+ 1. Wait for the Raspberry Pi to process the initial startup
+ 1. (Conditional) If the _wi-fi_ connection fails, you may want to reboot
 
 ### Connecting to Your Raspberry Pi Using SSH
 
