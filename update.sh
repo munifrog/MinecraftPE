@@ -24,5 +24,8 @@ if [ -e ".gitmodules" ]; then
     fi
     echo "Symbolically linking Nukkit JAR as \"${DIR_MINECRAFT}/nukkit.jar\""
     ln -s "${DIR_BASE}/${DIR_MAIN_SUBMODULE}/target/"nukkit-*.jar "${DIR_MINECRAFT}/nukkit.jar"
+    echo "Restarting service \"${NAME_SERVICE}\""
+    sudo systemctl restart ${NAME_SERVICE}
+    systemctl status ${NAME_SERVICE}
   fi
 fi

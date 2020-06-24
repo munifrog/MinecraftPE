@@ -40,9 +40,6 @@ else
   fi
 fi
 
-# Update the Nukkit JAR
-${0%/*}/update.sh
-
 if [ ! -e "${DIR_SERVICES}/${NAME_SERVICE}" ]; then
   # Copy the sample service and modify it according to user settings
   echo -e "Creating service unit file \"${NAME_SERVICE}\""
@@ -60,6 +57,8 @@ if [ ! -e "${DIR_SERVICES}/${NAME_SERVICE}" ]; then
   sudo systemctl start ${NAME_SERVICE}
   sudo systemctl status ${NAME_SERVICE}
 else
-  echo -e "Restarting the service \"${NAME_SERVICE}\"!\n  Unnecessary to set up service again."
-  sudo systemctl restart ${NAME_SERVICE}
+  echo -e "The service \"${NAME_SERVICE}\" already exists!\n  Unnecessary to set up service again."
 fi
+
+# Update the Nukkit JAR
+${0%/*}/update.sh
