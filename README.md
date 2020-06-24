@@ -90,7 +90,10 @@ An easy way to establish a _wi-fi_ connection is by modifying the `network-confi
 Either copy the `sample_network-config` as `network-config`, or retrieve the OS-provided `/system-boot/network-config`, backing it up if desired.
 Then modify it according to your (various) _wi-fi_ credentials, and replace the copy in the `/system-boot` folder.
 When you power on the Raspberry Pi, it will be processed (at least during first startup) and this file can be found at `/boot/firmware/network-config`.
-I have found that I need to reboot the Raspberry Pi before the _wi-fi_ will actually connect.
+With the first startup, you may have to restart the network service (or reboot the Raspberry Pi) before the _wi-fi_ will actually connect:
+  ```
+  sudo systemctl restart systemd-networkd.service
+  ```
 
 The Raspbian OS works well with the `wpa_supplicant.conf` file rather than `network-config`.
 It similarly gets placed within the `/boot` folder and is processed at startup.
