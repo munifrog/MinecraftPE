@@ -8,6 +8,7 @@ User=REPLACE_USER
 Group=REPLACE_USER
 Restart=on-abort
 WorkingDirectory=REPLACE_DIR_MINECRAFT
+ExecStartPre=-/usr/bin/bash -c "sed -i \"s|\(sub-motd=\).*|\1%H - $( ip -family inet -oneline address | grep wlan0 | sed \"s|[0-9]\+:\swlan0\s\+inet\s\([0-9\.]\+\).*|(\1)|g\" )|g\" REPLACE_DIR_MINECRAFT/server.properties"
 ExecStart=/usr/bin/java -jar REPLACE_DIR_MINECRAFT/nukkit.jar
 
 [Install]
