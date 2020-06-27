@@ -17,6 +17,8 @@ if [ -e ".gitmodules" ]; then
       chmod u+x ./mvnw
       echo -e "Compiling Nukkit code into JAR"
       ./mvnw clean package
+      echo -e "Restoring \"mvnw\" state"
+      git checkout -- mvnw
     popd > /dev/null
     if [ -L "${DIR_MINECRAFT}/nukkit.jar" ]; then
       echo -e "Removing previous \"${DIR_MINECRAFT}/nukkit.jar\" symbolic link"
