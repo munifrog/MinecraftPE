@@ -58,4 +58,4 @@ else
 fi
 
 # Update the Nukkit JAR
-${0%/*}/update.sh
+${0%/*}/update.sh -download
